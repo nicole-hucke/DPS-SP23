@@ -1,0 +1,200 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Hucke_HW3</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-02-15"><meta name="DC.source" content="Hucke_HW3.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">1: Read in Erebus_seismogram.mat. This is a  velocity seismogram (i.e., vertical ground motion) signal. Information about the signal(called data) is found in the variable hdr. hdr.sps gives the sample rate in Hz and hdr.atod gives the conversion used by the digitizer in units of volts/count.</a></li><li><a href="#3">2: Plot a properly scaled acceleration seismogram (units of mm/s2). Be careful to use the proper time differentiation constant. Hint: you can use diff to differentiate.</a></li><li><a href="#4">3: Plot a properly scaled displacement seismogram (units of mm). Hint: you can use cumsum to differentiate.</a></li></ul></div><pre class="codeinput"><span class="comment">%%%%% ASSIGNMENT03 (2023) - Nicole Hucke %%%</span>
+<span class="comment">%%%%% INTRODUCTION TO LINEAR OPERATORS %%%%</span>
+</pre><h2 id="2">1: Read in Erebus_seismogram.mat. This is a  velocity seismogram (i.e., vertical ground motion) signal. Information about the signal(called data) is found in the variable hdr. hdr.sps gives the sample rate in Hz and hdr.atod gives the conversion used by the digitizer in units of volts/count.</h2><p>Note that the seismometer sensitivity is 3200 V/m/s. Plot the seismogram with proper time and amplitude scaling. For amplitude of your graph use units of mm/s. Note: for seismograms you will want to remove the DC offset, which can be done by subtracting the mean or using the MATLAB function detrend.</p><pre class="codeinput">load(<span class="string">'Erebus_seismogram.mat'</span>); <span class="comment">% load the data</span>
+sps = hdr.sps; <span class="comment">% sample rate in Hz</span>
+fprintf(<span class="string">'Sample rate: %.2f Hz\n'</span>, sps);
+atod = hdr.atod; <span class="comment">% conversion used by the digitizer in units of volts/count</span>
+fprintf(<span class="string">'Conversion used by the digitizer: %.2e volts/count\n'</span>, atod);
+sensitivity = 3200; <span class="comment">% seismometer sensitivity in volts/(m/s)</span>
+
+<span class="comment">% Note: the raw signal from "data" is just in counts</span>
+signal = data * atod; <span class="comment">% convert the seismogram signal from counts to volts</span>
+disp(signal(1:10)) <span class="comment">% display the first 10 values of the signal in volts</span>
+
+<span class="comment">% Note: the signal amplitude need to be in mm/s</span>
+signal = (signal / sensitivity) * 1000; <span class="comment">% convert the signal from volts to mm/s using the seismometer sensitivity</span>
+disp(signal(1:10)) <span class="comment">% display the first 10 values of the signal in mm/s</span>
+
+<span class="comment">% Note: must remove the DC offset from the signal using the detrend function</span>
+det_signal = detrend(signal);
+
+<span class="comment">% plot the seismogram</span>
+time = (0:length(det_signal)-1) / sps; <span class="comment">% create a time vector based on the sample rate and signal length (number of samples)</span>
+plot(time, det_signal);
+xlabel(<span class="string">'Time (s)'</span>);
+ylabel(<span class="string">'Amplitude (mm/s)'</span>);
+title(<span class="string">'Erebus Seismogram'</span>);
+</pre><pre class="codeoutput">Sample rate: 40.00 Hz
+Conversion used by the digitizer: 1.19e-06 volts/count
+   -0.6893
+   -0.6893
+   -0.6893
+   -0.6893
+   -0.6893
+   -0.6893
+   -0.6893
+   -0.6894
+   -0.6894
+   -0.6894
+
+   -0.2154
+   -0.2154
+   -0.2154
+   -0.2154
+   -0.2154
+   -0.2154
+   -0.2154
+   -0.2154
+   -0.2154
+   -0.2154
+
+</pre><img vspace="5" hspace="5" src="Hucke_HW3_01.png" alt=""> <h2 id="3">2: Plot a properly scaled acceleration seismogram (units of mm/s2). Be careful to use the proper time differentiation constant. Hint: you can use diff to differentiate.</h2><pre class="codeinput">dt = 1/sps; <span class="comment">% determine time step</span>
+fprintf(<span class="string">'Time step for differentiation: %.2e seconds\n'</span>, dt);
+accel = diff(det_signal)/dt; <span class="comment">% use diff to differentiate</span>
+
+<span class="comment">% Note: the diff function will return a vector of N-1, so the original time vector will not work</span>
+<span class="comment">% plot the acceleration seismogram</span>
+figure
+time2 = (0:length(accel)-1) / sps;
+plot(time2, accel);
+xlabel(<span class="string">'Time (s)'</span>);
+ylabel(<span class="string">'Acceleration (mm/s^2)'</span>);
+title(<span class="string">'Erebus Seismogram - Acceleration'</span>);
+</pre><pre class="codeoutput">Time step for differentiation: 2.50e-02 seconds
+</pre><img vspace="5" hspace="5" src="Hucke_HW3_02.png" alt=""> <h2 id="4">3: Plot a properly scaled displacement seismogram (units of mm). Hint: you can use cumsum to differentiate.</h2><pre class="codeinput">displ = cumsum(det_signal)*dt;
+
+<span class="comment">% plot the displacement seismogram</span>
+figure
+plot(time, displ);
+xlabel(<span class="string">'Time (s)'</span>);
+ylabel(<span class="string">'Displacement (mm)'</span>);
+title(<span class="string">'Erebus Seismogram - Displacement'</span>);
+</pre><img vspace="5" hspace="5" src="Hucke_HW3_03.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%%%%% ASSIGNMENT03 (2023) - Nicole Hucke %%%
+%%%%% INTRODUCTION TO LINEAR OPERATORS %%%%
+
+%% 1: Read in Erebus_seismogram.mat. This is a  velocity seismogram (i.e., vertical ground motion) signal. Information about the signal(called data) is found in the variable hdr. hdr.sps gives the sample rate in Hz and hdr.atod gives the conversion used by the digitizer in units of volts/count. 
+% Note that the seismometer sensitivity is 3200 V/m/s. Plot the seismogram with proper time and amplitude scaling. For amplitude of your graph use units of mm/s. Note: for seismograms you will want to remove the DC offset, which can be done by subtracting the mean or using the MATLAB function detrend.
+
+load('Erebus_seismogram.mat'); % load the data
+sps = hdr.sps; % sample rate in Hz
+fprintf('Sample rate: %.2f Hz\n', sps);
+atod = hdr.atod; % conversion used by the digitizer in units of volts/count  
+fprintf('Conversion used by the digitizer: %.2e volts/count\n', atod);
+sensitivity = 3200; % seismometer sensitivity in volts/(m/s)
+
+% Note: the raw signal from "data" is just in counts
+signal = data * atod; % convert the seismogram signal from counts to volts
+disp(signal(1:10)) % display the first 10 values of the signal in volts
+
+% Note: the signal amplitude need to be in mm/s
+signal = (signal / sensitivity) * 1000; % convert the signal from volts to mm/s using the seismometer sensitivity
+disp(signal(1:10)) % display the first 10 values of the signal in mm/s
+
+% Note: must remove the DC offset from the signal using the detrend function
+det_signal = detrend(signal);
+
+% plot the seismogram 
+time = (0:length(det_signal)-1) / sps; % create a time vector based on the sample rate and signal length (number of samples)
+plot(time, det_signal);
+xlabel('Time (s)');
+ylabel('Amplitude (mm/s)');
+title('Erebus Seismogram');
+
+%% 2: Plot a properly scaled acceleration seismogram (units of mm/s2). Be careful to use the proper time differentiation constant. Hint: you can use diff to differentiate.
+
+dt = 1/sps; % determine time step
+fprintf('Time step for differentiation: %.2e seconds\n', dt);
+accel = diff(det_signal)/dt; % use diff to differentiate
+
+% Note: the diff function will return a vector of N-1, so the original time vector will not work
+% plot the acceleration seismogram
+figure
+time2 = (0:length(accel)-1) / sps;
+plot(time2, accel);
+xlabel('Time (s)');
+ylabel('Acceleration (mm/s^2)');
+title('Erebus Seismogram - Acceleration');
+
+%% 3: Plot a properly scaled displacement seismogram (units of mm). Hint: you can use cumsum to differentiate.
+
+displ = cumsum(det_signal)*dt;
+
+% plot the displacement seismogram
+figure
+plot(time, displ);
+xlabel('Time (s)');
+ylabel('Displacement (mm)');
+title('Erebus Seismogram - Displacement');
+##### SOURCE END #####
+--></body></html>
