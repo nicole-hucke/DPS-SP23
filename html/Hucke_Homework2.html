@@ -1,0 +1,344 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Homework2</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-02-08"><meta name="DC.source" content="Homework2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">QUESTION 1: Construct a 1.9 Hz sinusoid for a 10 s signal duration (i.e., 19 full cycles). Plot this sinusoid with an initial sample rate of 1000 Hz (i.e., N = 10,000 samples).  What is its Nyquist frequency?</a></li><li><a href="#3">QUESTION 2: Downsample the sinusoid from step 1 by a factor of 50 while keeping the signal duration 10 s. (Hint&#8230; you can easily downsample by passing the notation (1:50:end) as indices to your vector. What is the new Nyquist frequency of your sample?  What is the frequency of the plotted signal?</a></li><li><a href="#4">QUESTION 3: Downsample the sinusoid from step 1 by a factor of 500 and plot the new data. What is new Nyquist frequency and what is the (aliased) frequency of the plotted signal (should be easy to estimate off of the graph)?</a></li><li><a href="#5">QUESTION 4:</a></li><li><a href="#6">QUESTION 5: Based upon your findings in 3 and 4 derive an explicit expression for the aliased frequency as a function of Nyquist frequency and original frequency.</a></li><li><a href="#7">PART 2: demonstrates aliasing using sound wave recordings and two different methods of downsampling.</a></li><li><a href="#8">QUESTION 1: Load in data file whistle.mat located at course website assignment directory. Plot the time series using an appropriate time axis (in s) and the specified sample rate. Use sound(Y,Fs) to play the sound.  What is the Nyquist frequency?</a></li><li><a href="#9">QUESTION 2: Downsample the sound data by a factor of 12 and plot it. Again, use sound to play your downsampled file.  What is the new Nyquist frequency? Think about whether this new sample rate is high enough to adequately record a whistle sound.</a></li><li><a href="#10">QUESTION 3: Now resample the original sound file by using the MATLAB function decimate(Y,12).  Plot it on an appropriate time axis and play it at an appropriate sample rate.  Learn about MATLAB&#8217;s decimate using help decimate.</a></li><li><a href="#11">QUESTION 4: Provide a short answer to explain what is going on.</a></li></ul></div><pre class="codeinput"><span class="comment">%%%%% ASSIGNMENT 02 (2023) - Nicole Hucke</span>
+<span class="comment">%%%%% ALIASING %%%%%%%</span>
+</pre><h2 id="2">QUESTION 1: Construct a 1.9 Hz sinusoid for a 10 s signal duration (i.e., 19 full cycles). Plot this sinusoid with an initial sample rate of 1000 Hz (i.e., N = 10,000 samples).  What is its Nyquist frequency?</h2><pre class="codeinput">A = 1; <span class="comment">% No info on amplitude, so it's assumed</span>
+f = 1.9; <span class="comment">% frequency in Hz</span>
+duration = 10; <span class="comment">% duration in seconds</span>
+sps = 1000; <span class="comment">% sample rate in Hz (sample per second - sps)</span>
+N = duration*sps; <span class="comment">% number of samples (10,000 in this case)</span>
+t = linspace(0, duration, N); <span class="comment">% Creates a vector of 10 (duration) evenly spaced points in the interval [0,10000].</span>
+
+<span class="comment">%create sin wave</span>
+y = A*sin(2*pi*f*t);
+
+subplot(2, 2, 1); <span class="comment">% divide the figure into 2 rows and 2 columns and select the 1st subplot</span>
+plot(t, y);
+xlabel(<span class="string">'Time (s)'</span>);
+ylabel(<span class="string">'Amplitude'</span>);
+title(sprintf(<span class="string">'1.9 Hz Sinusoid'</span>));
+
+<span class="comment">% display the Nyquist frequency</span>
+downsampled_nyquist_frequency = sps/2; <span class="comment">% Nyquist frequency is simply half the sampling rate</span>
+disp([<span class="string">'Nyquist frequency: '</span>, num2str(downsampled_nyquist_frequency), <span class="string">' Hz'</span>]);
+</pre><pre class="codeoutput">Nyquist frequency: 500 Hz
+</pre><img vspace="5" hspace="5" src="Homework2_01.png" alt=""> <h2 id="3">QUESTION 2: Downsample the sinusoid from step 1 by a factor of 50 while keeping the signal duration 10 s. (Hint&#8230; you can easily downsample by passing the notation (1:50:end) as indices to your vector. What is the new Nyquist frequency of your sample?  What is the frequency of the plotted signal?</h2><pre class="codeinput">sps2 = sps/50; <span class="comment">% downsampled rate in Hz (sample per second - sps)</span>
+downsampled_y = y(1:50:end); <span class="comment">% select every 50th sample</span>
+downsampled_t = t(1:50:end); <span class="comment">% correspondingly downsample the time vector</span>
+
+subplot(2, 2, 2); <span class="comment">% divide the figure into 2 rows and 2 columns and select the 2nd subplot</span>
+plot(downsampled_t, downsampled_y);
+xlabel(<span class="string">'Time (s)'</span>);
+ylabel(<span class="string">'Amplitude'</span>);
+title(sprintf(<span class="string">'Downsampled (50) 1.9 Hz Sinusoid'</span>));
+
+<span class="comment">% display the Nyquist frequency</span>
+downsampled_nyquist_frequency = (sps2)/2;
+disp([<span class="string">'Downsampled (50) Nyquist frequency: '</span>, num2str(downsampled_nyquist_frequency), <span class="string">' Hz'</span>]);
+disp(<span class="string">'The plotted signal fequency is still 1.9 Hz'</span>);
+</pre><pre class="codeoutput">Downsampled (50) Nyquist frequency: 10 Hz
+The plotted signal fequency is still 1.9 Hz
+</pre><img vspace="5" hspace="5" src="Homework2_02.png" alt=""> <h2 id="4">QUESTION 3: Downsample the sinusoid from step 1 by a factor of 500 and plot the new data. What is new Nyquist frequency and what is the (aliased) frequency of the plotted signal (should be easy to estimate off of the graph)?</h2><pre class="codeinput">sps3 = sps/500; <span class="comment">% sample rate in Hz (sample per second - sps)</span>
+downsampled3_y = y(1:500:end); <span class="comment">% select every 500th sample</span>
+downsampled3_t = t(1:500:end); <span class="comment">% correspondingly downsample the time vector</span>
+
+subplot(2, 2, 3); <span class="comment">% divide the figure into 2 rows and 2 columns and select the 3rd subplot</span>
+plot(downsampled3_t, downsampled3_y);
+xlabel(<span class="string">'Time (s)'</span>);
+ylabel(<span class="string">'Amplitude'</span>);
+title(sprintf(<span class="string">'Downsampled (500) 1.9 Hz Sinusoid'</span>));
+
+<span class="comment">% display the Nyquist frequency</span>
+downsampled3_nyquist_frequency = (sps3)/2;
+disp([<span class="string">'Downsampled (500) Nyquist frequency: '</span>, num2str(downsampled3_nyquist_frequency), <span class="string">' Hz'</span>]);
+disp(<span class="string">'The aliased signal fequency appears to be 0.1 Hz'</span>);
+</pre><pre class="codeoutput">Downsampled (500) Nyquist frequency: 1 Hz
+The aliased signal fequency appears to be 0.1 Hz
+</pre><img vspace="5" hspace="5" src="Homework2_03.png" alt=""> <h2 id="5">QUESTION 4:</h2><pre class="codeinput"><span class="comment">%Downsample the sinusoid from part 1 by a factor of 476 and plot the new data.  What is new Nyquist frequency and what is the frequency of the plotted signal?</span>
+
+sps4 = sps/476; <span class="comment">% sample rate in Hz (sample per second - sps)</span>
+downsampled4_y = y(1:476:end);
+downsampled4_t = t(1:476:end);
+
+subplot(2, 2, 4); <span class="comment">% divide the figure into 2 rows and 2 columns and select the 4th subplot</span>
+plot(downsampled4_t, downsampled4_y);
+xlabel(<span class="string">'Time (s)'</span>);
+ylabel(<span class="string">'Amplitude'</span>);
+title(sprintf(<span class="string">'Downsampled (476) 1.9 Hz Sinusoid'</span>));
+
+<span class="comment">% display the Nyquist frequency</span>
+downsampled4_nyquist_frequency = (sps4)/2;
+disp([<span class="string">'Downsampled (476) Nyquist frequency: '</span>, num2str(downsampled4_nyquist_frequency), <span class="string">' Hz'</span>]);
+disp(<span class="string">'The aliased signal frequency appears to be 0.2 Hz'</span>);
+</pre><pre class="codeoutput">Downsampled (476) Nyquist frequency: 1.0504 Hz
+The aliased signal frequency appears to be 0.2 Hz
+</pre><img vspace="5" hspace="5" src="Homework2_04.png" alt=""> <h2 id="6">QUESTION 5: Based upon your findings in 3 and 4 derive an explicit expression for the aliased frequency as a function of Nyquist frequency and original frequency.</h2><pre class="codeinput">disp(<span class="string">'To obtain the aliased frequency of the waves, we must apply: 2 * aliased nyquist - original frequency'</span>)
+
+aliased_f3 = 2*downsampled3_nyquist_frequency - f;
+disp([<span class="string">'The aliased signal frequency from question 3 is '</span>, num2str(aliased_f3)]);
+
+aliased_f4 = 2*downsampled4_nyquist_frequency - f;
+disp([<span class="string">'The aliased signal frequency from question 4 is '</span>, num2str(aliased_f4)]);
+</pre><pre class="codeoutput">To obtain the aliased frequency of the waves, we must apply: 2 * aliased nyquist - original frequency
+The aliased signal frequency from question 3 is 0.1
+The aliased signal frequency from question 4 is 0.20084
+</pre><h2 id="7">PART 2: demonstrates aliasing using sound wave recordings and two different methods of downsampling.</h2><h2 id="8">QUESTION 1: Load in data file whistle.mat located at course website assignment directory. Plot the time series using an appropriate time axis (in s) and the specified sample rate. Use sound(Y,Fs) to play the sound.  What is the Nyquist frequency?</h2><pre class="codeinput">load(<span class="string">'whistle.mat'</span>);
+
+t = ((1:length(Y))/Fs);
+
+close <span class="string">all</span>
+subplot(1, 3, 1); <span class="comment">% divide the figure into 1 row and 3 columns and select the 1st subplot</span>
+plot(t,Y)
+xlabel(<span class="string">'Time (s)'</span>);
+ylabel(<span class="string">'Amplitude'</span>);
+title(sprintf(<span class="string">'Original'</span>));
+<span class="comment">%sound(Y,Fs)</span>
+
+nyquist2 = Fs/2;
+disp([<span class="string">'The nyquist frequency for this sound wave is: '</span> num2str(nyquist2)]);
+</pre><pre class="codeoutput">The nyquist frequency for this sound wave is: 22050
+</pre><img vspace="5" hspace="5" src="Homework2_05.png" alt=""> <h2 id="9">QUESTION 2: Downsample the sound data by a factor of 12 and plot it. Again, use sound to play your downsampled file.  What is the new Nyquist frequency? Think about whether this new sample rate is high enough to adequately record a whistle sound.</h2><pre class="codeinput">Y2 = Y(1:12:end);
+Fs2 = round(Fs/12);
+t2 = ((1:length(Y2))/Fs2);
+
+subplot(1, 3, 2)
+plot(t2,Y2);
+xlabel(<span class="string">'Time (s)'</span>);
+ylabel(<span class="string">'Amplitude'</span>);
+title(sprintf(<span class="string">'Downsampled (12)'</span>));
+<span class="comment">%sound(Y2,Fs2);</span>
+
+nyquist2 = Fs2/2;
+disp([<span class="string">'The nyquist frequency for this sound wave is: '</span> num2str(nyquist2)]);
+</pre><pre class="codeoutput">The nyquist frequency for this sound wave is: 1837.5
+</pre><img vspace="5" hspace="5" src="Homework2_06.png" alt=""> <h2 id="10">QUESTION 3: Now resample the original sound file by using the MATLAB function decimate(Y,12).  Plot it on an appropriate time axis and play it at an appropriate sample rate.  Learn about MATLAB&#8217;s decimate using help decimate.</h2><pre class="codeinput">Ydec = decimate(Y,12);
+
+subplot(1, 3, 3)
+plot(t2, Ydec)
+xlabel(<span class="string">'Time (s)'</span>);
+ylabel(<span class="string">'Amplitude'</span>);
+title(sprintf(<span class="string">'Decimated (12)'</span>));
+<span class="comment">%sound(Ydec,Fs2);</span>
+</pre><img vspace="5" hspace="5" src="Homework2_07.png" alt=""> <h2 id="11">QUESTION 4: Provide a short answer to explain what is going on.</h2><p>Why are whistle sounds in 2 and 3 distorted?</p><pre class="codeinput">disp(<span class="string">'They are downsampled by a factor of 12, which involves reducing the number of samples in the signal, while preserving its original frequency content'</span>)
+<span class="comment">% How is their distortion different?</span>
+disp(<span class="string">'By just listening, it appears that 3 somewhat follows the original tone similarly to the original, but with a higher pitch, whereas 2 has tone variations'</span>)
+<span class="comment">% Which of the signals is aliased?</span>
+disp(<span class="string">'The second one (downsampled (12) is the aliased one'</span>)
+<span class="comment">% What did decimate do to avoid aliasing?</span>
+disp(<span class="string">'It applied an anti-aliasing filter to the signal before downsampling. The anti-aliasing filter removes high-frequency components that are beyond the new Nyquist frequency (i.e., half the new sample rate) after downsampling. By removing these high-frequency components, the function helps ensure that the signal after downsampling will not contain any new, false frequencies that are created due to aliasing.'</span>)
+</pre><pre class="codeoutput">They are downsampled by a factor of 12, which involves reducing the number of samples in the signal, while preserving its original frequency content
+By just listening, it appears that 3 somewhat follows the original tone similarly to the original, but with a higher pitch, whereas 2 has tone variations
+The second one (downsampled (12) is the aliased one
+It applied an anti-aliasing filter to the signal before downsampling. The anti-aliasing filter removes high-frequency components that are beyond the new Nyquist frequency (i.e., half the new sample rate) after downsampling. By removing these high-frequency components, the function helps ensure that the signal after downsampling will not contain any new, false frequencies that are created due to aliasing.
+</pre><img vspace="5" hspace="5" src="Homework2_08.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%%%%% ASSIGNMENT 02 (2023) - Nicole Hucke
+%%%%% ALIASING %%%%%%%
+
+%% QUESTION 1: Construct a 1.9 Hz sinusoid for a 10 s signal duration (i.e., 19 full cycles). Plot this sinusoid with an initial sample rate of 1000 Hz (i.e., N = 10,000 samples).  What is its Nyquist frequency?
+
+A = 1; % No info on amplitude, so it's assumed
+f = 1.9; % frequency in Hz
+duration = 10; % duration in seconds
+sps = 1000; % sample rate in Hz (sample per second - sps)
+N = duration*sps; % number of samples (10,000 in this case)
+t = linspace(0, duration, N); % Creates a vector of 10 (duration) evenly spaced points in the interval [0,10000].
+
+%create sin wave
+y = A*sin(2*pi*f*t);
+
+subplot(2, 2, 1); % divide the figure into 2 rows and 2 columns and select the 1st subplot
+plot(t, y);
+xlabel('Time (s)');
+ylabel('Amplitude');
+title(sprintf('1.9 Hz Sinusoid'));
+
+% display the Nyquist frequency
+downsampled_nyquist_frequency = sps/2; % Nyquist frequency is simply half the sampling rate
+disp(['Nyquist frequency: ', num2str(downsampled_nyquist_frequency), ' Hz']);
+
+%% QUESTION 2: Downsample the sinusoid from step 1 by a factor of 50 while keeping the signal duration 10 s. (Hint… you can easily downsample by passing the notation (1:50:end) as indices to your vector. What is the new Nyquist frequency of your sample?  What is the frequency of the plotted signal?
+
+sps2 = sps/50; % downsampled rate in Hz (sample per second - sps)
+downsampled_y = y(1:50:end); % select every 50th sample
+downsampled_t = t(1:50:end); % correspondingly downsample the time vector
+
+subplot(2, 2, 2); % divide the figure into 2 rows and 2 columns and select the 2nd subplot
+plot(downsampled_t, downsampled_y);
+xlabel('Time (s)');
+ylabel('Amplitude');
+title(sprintf('Downsampled (50) 1.9 Hz Sinusoid'));
+
+% display the Nyquist frequency
+downsampled_nyquist_frequency = (sps2)/2; 
+disp(['Downsampled (50) Nyquist frequency: ', num2str(downsampled_nyquist_frequency), ' Hz']);
+disp('The plotted signal fequency is still 1.9 Hz');
+
+%% QUESTION 3: Downsample the sinusoid from step 1 by a factor of 500 and plot the new data. What is new Nyquist frequency and what is the (aliased) frequency of the plotted signal (should be easy to estimate off of the graph)?
+
+sps3 = sps/500; % sample rate in Hz (sample per second - sps)
+downsampled3_y = y(1:500:end); % select every 500th sample
+downsampled3_t = t(1:500:end); % correspondingly downsample the time vector
+
+subplot(2, 2, 3); % divide the figure into 2 rows and 2 columns and select the 3rd subplot
+plot(downsampled3_t, downsampled3_y);
+xlabel('Time (s)');
+ylabel('Amplitude');
+title(sprintf('Downsampled (500) 1.9 Hz Sinusoid'));
+
+% display the Nyquist frequency
+downsampled3_nyquist_frequency = (sps3)/2; 
+disp(['Downsampled (500) Nyquist frequency: ', num2str(downsampled3_nyquist_frequency), ' Hz']);
+disp('The aliased signal fequency appears to be 0.1 Hz');
+
+%% QUESTION 4: 
+%Downsample the sinusoid from part 1 by a factor of 476 and plot the new data.  What is new Nyquist frequency and what is the frequency of the plotted signal?
+
+sps4 = sps/476; % sample rate in Hz (sample per second - sps)
+downsampled4_y = y(1:476:end);
+downsampled4_t = t(1:476:end); 
+
+subplot(2, 2, 4); % divide the figure into 2 rows and 2 columns and select the 4th subplot
+plot(downsampled4_t, downsampled4_y);
+xlabel('Time (s)');
+ylabel('Amplitude');
+title(sprintf('Downsampled (476) 1.9 Hz Sinusoid'));
+
+% display the Nyquist frequency
+downsampled4_nyquist_frequency = (sps4)/2; 
+disp(['Downsampled (476) Nyquist frequency: ', num2str(downsampled4_nyquist_frequency), ' Hz']);
+disp('The aliased signal frequency appears to be 0.2 Hz');
+
+%% QUESTION 5: Based upon your findings in 3 and 4 derive an explicit expression for the aliased frequency as a function of Nyquist frequency and original frequency.
+disp('To obtain the aliased frequency of the waves, we must apply: 2 * aliased nyquist - original frequency')
+
+aliased_f3 = 2*downsampled3_nyquist_frequency - f;
+disp(['The aliased signal frequency from question 3 is ', num2str(aliased_f3)]);
+
+aliased_f4 = 2*downsampled4_nyquist_frequency - f;
+disp(['The aliased signal frequency from question 4 is ', num2str(aliased_f4)]);
+
+%% PART 2: demonstrates aliasing using sound wave recordings and two different methods of downsampling. 
+%% QUESTION 1: Load in data file whistle.mat located at course website assignment directory. Plot the time series using an appropriate time axis (in s) and the specified sample rate. Use sound(Y,Fs) to play the sound.  What is the Nyquist frequency?
+
+load('whistle.mat');
+
+t = ((1:length(Y))/Fs);
+
+close all
+subplot(1, 3, 1); % divide the figure into 1 row and 3 columns and select the 1st subplot
+plot(t,Y)
+xlabel('Time (s)');
+ylabel('Amplitude');
+title(sprintf('Original'));
+%sound(Y,Fs)
+
+nyquist2 = Fs/2;
+disp(['The nyquist frequency for this sound wave is: ' num2str(nyquist2)]);
+
+%% QUESTION 2: Downsample the sound data by a factor of 12 and plot it. Again, use sound to play your downsampled file.  What is the new Nyquist frequency? Think about whether this new sample rate is high enough to adequately record a whistle sound.
+
+Y2 = Y(1:12:end);
+Fs2 = round(Fs/12); 
+t2 = ((1:length(Y2))/Fs2);
+
+subplot(1, 3, 2)
+plot(t2,Y2);
+xlabel('Time (s)');
+ylabel('Amplitude');
+title(sprintf('Downsampled (12)'));
+%sound(Y2,Fs2);
+
+nyquist2 = Fs2/2;
+disp(['The nyquist frequency for this sound wave is: ' num2str(nyquist2)]);
+
+%% QUESTION 3: Now resample the original sound file by using the MATLAB function decimate(Y,12).  Plot it on an appropriate time axis and play it at an appropriate sample rate.  Learn about MATLAB’s decimate using help decimate. 
+
+Ydec = decimate(Y,12);
+
+subplot(1, 3, 3)
+plot(t2, Ydec)
+xlabel('Time (s)');
+ylabel('Amplitude');
+title(sprintf('Decimated (12)'));
+%sound(Ydec,Fs2);
+
+%% QUESTION 4: Provide a short answer to explain what is going on.  
+% Why are whistle sounds in 2 and 3 distorted?  
+disp('They are downsampled by a factor of 12, which involves reducing the number of samples in the signal, while preserving its original frequency content')
+% How is their distortion different?  
+disp('By just listening, it appears that 3 somewhat follows the original tone similarly to the original, but with a higher pitch, whereas 2 has tone variations')
+% Which of the signals is aliased?  
+disp('The second one (downsampled (12) is the aliased one')
+% What did decimate do to avoid aliasing? 
+disp('It applied an anti-aliasing filter to the signal before downsampling. The anti-aliasing filter removes high-frequency components that are beyond the new Nyquist frequency (i.e., half the new sample rate) after downsampling. By removing these high-frequency components, the function helps ensure that the signal after downsampling will not contain any new, false frequencies that are created due to aliasing.')
+
+##### SOURCE END #####
+--></body></html>
