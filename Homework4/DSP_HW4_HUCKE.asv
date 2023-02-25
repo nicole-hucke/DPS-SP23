@@ -77,17 +77,22 @@ title('Filtered CO2 data and convolved output');
 legend('Filtered data', 'Convolved data', 'Convolved using "same"');
 
 %% Short answers:
-fprintf("Briefly describe what the median filter is doing in part 1: Comment on whether it a linear filter? \n")
-fprintf("The median filter is applied to remove spurious data. It's a *nonlinear* (the output is not a linear combination of the input sample) filtering technique that replaces each data point with the median of neighboring points. \n\n") 
+% Briefly describe what the median filter is doing in part 1: Comment on whether it a linear filter?  
+print("The median filter is applied to remove spurious data. It's a *nonlinear* (the output is not a linear combination of the input sample) filtering technique that replaces each data point with the median of neighboring points.") 
 
-fprintf("Could the input signal be recovered if you knew the type of median filter? \n")
-fprintf("If we knew the type of median filter, we could not recover the original input signal because median filters remove information by their very nature, and are not able to trace back to the original signal \n\n")
+% Could the input signal be recovered if you knew the type of median filter?  
 
-fprintf("Beyond removing the spurious data how does it affect the data at the peaks and troughs of each cycle? \n")
-fprintf("By reducing the amplitude of the spikes as the filter replaces each spike with the median value of its neighboring samples. This results in a smoother signal without the spurious data points, but the peaks and troughs are less pronounced. \n\n")
+print("If we knew the type of median filter, we could not recover the original input signal because median filters remove information by their very nature, and are not able to trace back to the original signal")
 
-fprintf("Describe what the filter would look like if you combined the impulse response of 6-3a and 6-3b. Describe what the output signal would look like if you added the output signal from parts 2 and 3) \n")
-fprintf(" The output signal from part 2 is a low-pass filtered version of the input signal, while the output signal from part 3 is a high-pass filtered version of the input signal. Combining these two output signals would result in a signal that has had both low-frequency and high-frequency components removed, leaving only the mid-band frequencies. In other words, the resulting signal would be a bandpass filtered (only a certain range of frequencies) version of the original CO2 data. \n\n")
+% Beyond removing the spurious data how does it affect the data at the peaks and troughs of each cycle?
 
-fprintf("Which filter (below) removes the DC offset? \n")
-fprintf("The high-pass filter will remove the DC offset (second graph in the image)")
+print("By reducing the amplitude of the spikes, as the filter replaces each spike with the median value of its neighboring samples. This results in a smoother signal without the spurious data points, but the peaks and troughs are less pronounced.")
+
+
+
+% Describe what the filter would look like if you combined the impulse response of 6-3a and 6-3b. Describe what the output signal would look like if you added the output signal from parts 2 and 3)
+
+
+
+
+Which filter (below) removes the DC offset?
